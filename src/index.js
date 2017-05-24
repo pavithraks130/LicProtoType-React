@@ -1,5 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppComponent from './components/app';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import reducers from './reducers/index'
+import LoginComponent from './containers/LoginComponent';
 
-ReactDOM.render(<AppComponent />,document.querySelector('#root'));
+const createLocalStore = applyMiddleware()(createStore);
+
+ReactDOM.render(
+	<Provider store={createLocalStore(reducers)}>
+		<LoginComponent />
+	</Provider>
+	,document.querySelector('#root'));
